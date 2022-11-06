@@ -19,8 +19,8 @@ app.use('/blog_api/auth', authRouter);
 
 app.use('/blog_api/user', userRouter);
 
-app.get('/', (req, res) => {
-    res.send('Welcome to the book API');
+app.get('/home', (req, res) => {
+    res.send('Welcome to the Blogging API');
 });
 
 
