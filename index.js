@@ -13,11 +13,14 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const authRouter = require("./routes/auth");
-const userRouter = require("./routes/user")
+const userRouter = require("./routes/user");
+const blogRouter = require('./routes/blogs')
 
 app.use('/blog_api/auth', authRouter);
 
 app.use('/blog_api/user', userRouter);
+
+app.use('/blog_api', blogRouter)
 
 app.get('/home', (req, res) => {
     res.send('Welcome to the Blogging API');

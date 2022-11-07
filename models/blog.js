@@ -12,8 +12,7 @@ const BlogSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     description: {
         type: String,
@@ -34,11 +33,13 @@ const BlogSchema = new Schema({
     },
     read_count: {
         type: Number,
-        required: true
+        required: false
     },
     reading_time: {
         type: Number,
-        required: true
+        required: false
+        //required: true
+        //default: write code here??
     },
     tags: {
         type: Array,
