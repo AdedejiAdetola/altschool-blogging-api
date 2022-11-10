@@ -15,6 +15,10 @@ exports.updateUser = async (req, res)=>{
                 { new: true}
             )
             res.status(200).json(updatedUser);
+            // res.status(200).render('signup', {
+            //     pageTitle: 'SignUp',
+
+            // })
         } catch (err) {
             res.status(500).json(err);
         }
