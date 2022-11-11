@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const postLogin = require('./auth')
+const authRouter = require('../routes/auth')
 
 
 // UPDATE USER
@@ -55,7 +57,13 @@ exports.getUser = async(req, res) => {
     try{
         const user = await User.findById(req.params.userId);
         const {password, ...others} = user._doc;
-        res.status(200).json(others);
+        //res.status(200).json(others);
+        console.log(authRouter)
+        res.status(200).render('user', {
+            pageTitle: 'UserPage',
+            details: others,
+            // token:authRouter.token
+        })
 
     } catch (err) {
         res.status(500).json(err);

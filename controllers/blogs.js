@@ -52,7 +52,11 @@ exports.createPublishedBlog = async (req, res) => {
 exports.getAllBlogs = async (req, res) => {
     try {
         blogs = await Blog.find({ "publishedState": true});
-        res.status(200).json(blogs)
+        //res.status(200).json(blogs);
+        res.status(200).render('blogs', {
+            pageTitle:'Blog Page',
+            blogs: blogs
+        })
     } catch (err) {
         res.status(400).json(err)
     }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/blog_api/auth/signup">Signup</a></li>
+                <li><a href="/blog_api/auth/login">Login</a></li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to the Blog Api</h1>
+        <main>
+            <% for (let blog of blogs) {%>
+            <div>
+                <h2><span>Title:</span><%= blog.title %></h2>
+                <p><span>Description:</span><%= blog.description %></p>
+                <p><span>Body:</span><%= blog.body %></p>
+                <p><span>Author:</span><%= blog.author %></p>
+            </div>
+            <% } %>
+        </main>
+
+    </main>
+</body>
+</html>

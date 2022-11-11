@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const verify = async (req, res, next) => {
     const authHeader = await req.headers.authorization;
-    //console.log(authHeader);
+    console.log(authHeader);
     if (authHeader) {
         const token = authHeader.split(" ")[1]
 

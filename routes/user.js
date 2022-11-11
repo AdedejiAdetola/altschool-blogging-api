@@ -8,7 +8,6 @@ userRouter.put('/:userId', verify, updateUser)
 //DELETE USER
 userRouter.delete('/:userId', verify, deleteUser)
 
-
 // GET USER
 userRouter.get('/:userId', verify, getUser)
 

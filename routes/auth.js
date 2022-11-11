@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const { postSignup, postLogin, getSignup } = require('../controllers/auth');
+const { postSignup, postLogin, getSignup, getLogin } = require('../controllers/auth');
 require('dotenv').config();
 
 const authRouter = express.Router();
@@ -12,15 +12,16 @@ authRouter.post(
 );
 
 authRouter.post(
-    '/login',
-    async (req, res, next) => {
-        passport.authenticate('login', postLogin
-        )(req, res, next);
-    }
+    '/login',postLogin
+    
 );
 
 authRouter.get(
     '/signup', getSignup
+)
+
+authRouter.get(
+    '/login', getLogin
 )
 
 
