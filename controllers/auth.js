@@ -12,6 +12,7 @@ exports.postSignup = async (req, res, next) => {
     await res.redirect('/blog_api/auth/login');
 }
 
+const token = '';
 // POST LOGIN
 exports.postLogin = async (req, res, next) => {
     passport.authenticate('login', async (err, user, info) => {
@@ -32,21 +33,16 @@ exports.postLogin = async (req, res, next) => {
                     if (error) return next(error);
     
                     const body = { _id: user._id, email: user.email };
-                    //You store the id and email in the payload of the JWT. 
-                    // You then sign the token with a secret or key (JWT_SECRET), and send back the token to the user.
-                    // DO NOT STORE PASSWORDS IN THE JWT!
+                    
                     const token = jwt.sign({ user: body }, process.env.JWT_SECRET, {expiresIn: "1h"});
     
-                    //res.redirect('/home');
-                    // return res.json({ 
-                    //     user,
-                    //     token: token
-                    //  });
-                    // const savedUser = user.save()
-                    await token
-                    res.redirect('/blog_api/user/'+user._id)
-                    return(token)
+                    //res.redirect('/blog_api/user/'+user._id)
+                    return res.json({ 
+                        user,
+                        token: token
+                     });
                     //render token to user controller
+                    
                 }
             );
         } catch (error) {
@@ -55,6 +51,8 @@ exports.postLogin = async (req, res, next) => {
     }
     )(req, res, next);
 }
+
+console.log('token', token)
 
 // GET SIGNUP
 exports.getSignup = (req, res, next) => {
