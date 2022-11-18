@@ -122,6 +122,7 @@ exports.deleteBlog = async (req, res) => {
 exports.ownerGetBlogs = async (req, res) => {
 
     const published = req.query.pub;
+    console.log(published)
     try {
         let blogs;
         const user = await User.findById(req.params.userId);
