@@ -12,7 +12,7 @@ authRouter.post(
 );
 
 authRouter.post(
-    '/login',postLogin
+    '/login', postLogin
     
 );
 

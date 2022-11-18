@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/home">Back To Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to the Blog Api</h1>
+        <% if (blogs.length) {%>
+            <% for (let blog of blogs) {%>
+                <div>
+                    <p>Welcome <%= blogs.author %> &nbsp;</p>
+        
+                    <p>Check out all your blogs</p>
+                    <ul>
+                        <li><a href="/<%= details._id %>/blog">All your blogs</a></li>
+                        <li><a href="/<%= details._id %>/blog?pub=true/">Published Blogs</a></li>
+                        <li><a href="/<%= details._id %>/blog?pub=false/">Drafted Blogs</a></li>
+                    </ul>
+                </div>
+            <% } %>
+            
+        <% } else {%>
+            <p>No Blogs Available, Create New Blogs!</p>
+            <ul>
+                <li><a href="/blog_api/:userId/blog">Create blog</a></li>
+                <li><a href="/blog_api/auth/login">Login</a></li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        <% } %>
+        
+    </main>
+</body>
+</html>

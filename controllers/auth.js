@@ -12,7 +12,6 @@ exports.postSignup = async (req, res, next) => {
     await res.redirect('/blog_api/auth/login');
 }
 
-const token = '';
 // POST LOGIN
 exports.postLogin = async (req, res, next) => {
     passport.authenticate('login', async (err, user, info) => {
@@ -35,13 +34,23 @@ exports.postLogin = async (req, res, next) => {
                     const body = { _id: user._id, email: user.email };
                     
                     const token = jwt.sign({ user: body }, process.env.JWT_SECRET, {expiresIn: "1h"});
-    
-                    //res.redirect('/blog_api/user/'+user._id)
-                    return res.json({ 
-                        user,
-                        token: token
-                     });
-                    //render token to user controller
+                    
+                    const cookieOption = {
+                        expires: new Date(Date.now() + (24 * 60 * 60 * 1000)),
+                        httpOnly: true,
+                        secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+                    }
+
+                    // send cookie via jwt
+                    res.cookie(
+                        'jwt', token, cookieOption
+                    );
+
+                    // res.json({ 
+                    //     user,
+                    //     token: token
+                    //  });
+                    return res.redirect('/blog_api/user/'+user._id)
                     
                 }
             );
@@ -51,8 +60,6 @@ exports.postLogin = async (req, res, next) => {
     }
     )(req, res, next);
 }
-
-console.log('token', token)
 
 // GET SIGNUP
 exports.getSignup = (req, res, next) => {
@@ -67,7 +74,8 @@ exports.getSignup = (req, res, next) => {
 
 //GET HOMEPAGE
 exports.getHomePage = async (req, res, next) => {
-    await res.status(200).render('home',{
+
+   await res.status(200).render('home',{
         pageTitle: 'Home Page',
         path: '/home'
     });

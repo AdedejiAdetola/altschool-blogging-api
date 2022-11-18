@@ -126,14 +126,26 @@ exports.ownerGetBlogs = async (req, res) => {
         let blogs;
         const user = await User.findById(req.params.userId);
         const {password, email, ...others} = user._doc;
-        if (published) {
+        if (published || !published) {
+            console.log(published)
             // /:userId/blog?pub=true #published post
             // /:userId/blog?pub=false #drafted post
             blogs = await Blog.find({ email, "publishedState":published  });
-            res.status(200).json(blogs)
+
+            // res.status(200).json(blogs)
+            console.log('published state',blogs)
+            res.status(200).render('published-state', {
+                pageTitle: 'publishedState',
+                blogs
+            })
         } else {
             blogs = await Blog.find({ email });
-            res.status(200).json(blogs)
+            // res.status(200).json(blogs)
+            console.log('all-blogs',blogs)
+            res.status(200).render('all-blogs', {
+                pageTitle: 'AllBlogs',
+                blogs
+            })
         }
     } catch (err) {
         res.status(400).json(err)

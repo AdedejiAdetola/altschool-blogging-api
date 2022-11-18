@@ -2,6 +2,8 @@ require('./db').connectToMongoDB() // Connect to MongoDB
 require('dotenv').config()
 
 require("./authentication/authenticate") // Signup and login authentication middleware
+
+const cookieParser = require('cookie-parser')
 const path = require('path');
 
 const bodyParser = require('body-parser');
@@ -15,6 +17,8 @@ app.set('views', 'views');
 app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(cookieParser());
 
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
