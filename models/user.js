@@ -24,7 +24,7 @@ const UserSchema = new Schema({
 });
 
 
-// The code in the UserScheme.pre() function is called a pre-hook.
+// The code in the UserScheme.pre() fun65ction is called a pre-hook.
 // Before the user information is saved in the database, this function will be called,
 // you will get the plain text password, hash it, and store it.
 UserSchema.pre(

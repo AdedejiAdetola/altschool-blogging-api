@@ -1,9 +1,13 @@
 const blogRouter = require('express').Router();
 const verify = require('../authentication/verify');
-const { createBlog, createPublishedBlog, getAllBlogs, updateBlog, deleteBlog, ownerGetBlogs } = require('../controllers/blogs');
+const { createBlog, createPublishedBlog, getAllBlogs, updateBlog, deleteBlog, ownerGetBlogs, getCreateBlogs } = require('../controllers/blogs');
 
-//CREATE BLOGS (published state = false)
+//POST CREATE BLOGS (published state = false)
 blogRouter.post('/:userId/blog', verify, createBlog)
+
+//GET CREATE BLOGS
+blogRouter.get('/:userId/create', verify, getCreateBlogs)
+
 
 //UPDATE BLOGS (to published state = true)
 blogRouter.put('/:userId/blog/:id/pub', verify, createPublishedBlog)

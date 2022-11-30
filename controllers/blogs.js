@@ -7,6 +7,7 @@ exports.createBlog = async (req, res)=>{
     try {
         const savedBlog = await newBlog.save()
         res.status(200).json(savedBlog)
+        
 
         // const user = await User.findById(req.params.userId);
         // const {password, email, ...others} = user._doc;
@@ -17,6 +18,19 @@ exports.createBlog = async (req, res)=>{
     }
 }
 
+//GET CREATE BLOGS PAGE
+
+exports.getCreateBlogs = async (req, res) => {
+    const user = await User.findById(req.params.userId);
+    const {password, email, ...others} = user._doc;
+    console.log('details.id', others)
+    res.status(200).render('c-blog',{
+        pageTitle: 'createBlog',
+        details: others,
+        path: '/blog_api/' + details._id + '/create'
+    })
+}
+
 //CREATE PUBLISHED BLOGS (to published state = true)
 exports.createPublishedBlog = async (req, res) => {
     try{
@@ -24,8 +38,8 @@ exports.createPublishedBlog = async (req, res) => {
         const blog = await Blog.findById(req.params.id)
         const user = await User.findById(req.params.userId);
         const {password, email, ...others} = user._doc;
-        console.log(email)
-        console.log(blog.email)
+        //console.log(email)
+        //console.log(blog.email)
         if (blog.email === email) {
             
             try {
@@ -142,7 +156,8 @@ exports.ownerGetBlogs = async (req, res) => {
         } else {
             blogs = await Blog.find({ email });
             // res.status(200).json(blogs)
-            console.log('all-blogs',blogs)
+            //console.log('all-blogs',blogs)
+            console.log('blogs', blogs)
             res.status(200).render('all-blogs', {
                 pageTitle: 'AllBlogs',
                 blogs
